@@ -16,7 +16,7 @@
         padding: 0;
     }
     #card {
-        background: rgba(255,255,255,0.65);
+        background: rgba(255,255,255,0.70);
         padding: 30px 38px;
         border-radius: 20px;
         max-width: 380px;
@@ -27,12 +27,14 @@
         line-height: 1.4;
         font-weight: 500;
         box-shadow: 0 0 25px rgba(0,0,0,0.2);
+        z-index: 1000;
     }
     .heart {
         position: fixed;
         font-size: 22px;
-        animation: floatUp 5s linear infinite;
+        animation: floatUp 5s linear forwards;
         color: #ffccd5;
+        pointer-events: none;
     }
     @keyframes floatUp {
         0% {transform: translateY(0); opacity: 1;}
@@ -40,9 +42,9 @@
     }
 </style>
 </head>
-<body onclick="createHeart()">
+<body>
 
-<div id="card" onclick="nextMessage(); event.stopPropagation();">
+<div id="card">
     <div id="message"></div>
 </div>
 
@@ -62,17 +64,17 @@ const messages = [
 ];
 
 let index = 0;
+const msgBox = document.getElementById("message");
+const card = document.getElementById("card");
 
 function nextMessage() {
     if (index < messages.length) {
-        document.getElementById("message").innerHTML = messages[index];
+        msgBox.innerHTML = messages[index];
         index++;
     } else {
-        document.getElementById("message").innerHTML = "❤️ thank you for reading ❤️";
+        msgBox.innerHTML = "❤️ thank you for reading ❤️";
     }
 }
-
-nextMessage();
 
 function createHeart(){
     const heart = document.createElement("div");
@@ -84,8 +86,19 @@ function createHeart(){
 
     setTimeout(() => {
         heart.remove();
-    }, 4500);
+    }, 5000);
 }
+
+card.addEventListener("click", function(event){
+    nextMessage();
+    event.stopPropagation();
+});
+
+document.body.addEventListener("click", function(){
+    createHeart();
+});
+
+nextMessage();
 </script>
 
 </body>
