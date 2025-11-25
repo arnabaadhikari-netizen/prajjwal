@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Prajjwal ❤️</title>
+<style>
+    body { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        background: linear-gradient(135deg, #ff4d6d, #d30000);
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+        color: black;
+        margin: 0;
+        padding: 0;
+    }
+    #card {
+        background: rgba(255,255,255,0.65);
+        padding: 30px 38px;
+        border-radius: 20px;
+        max-width: 380px;
+        text-align: center;
+        font-size: 18px;
+        cursor: pointer;
+        user-select: none;
+        line-height: 1.4;
+        font-weight: 500;
+        box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    }
+    .heart {
+        position: fixed;
+        font-size: 22px;
+        animation: floatUp 5s linear infinite;
+        color: #ffccd5;
+    }
+    @keyframes floatUp {
+        0% {transform: translateY(0); opacity: 1;}
+        100% {transform: translateY(-200px); opacity: 0;}
+    }
+</style>
+</head>
+<body onclick="createHeart()">
+
+<div id="card" onclick="nextMessage(); event.stopPropagation();">
+    <div id="message"></div>
+</div>
+
+<script>
+const messages = [
+    "Hey Prajjwal! How have you been?",
+    "I wanted to tell you something...",
+    "You are honestly an amazing person.",
+    "Talking to you and thinking about you makes me happy.",
+    "It's a feeling I can’t even describe.",
+    "I am falling for you — and it’s fine if you don’t.",
+    "Just wanted to let you know that your message is the favourite notification that makes me smile.",
+    "I feel so happy and blessed to have you.",
+    "And yeah… 'The Moon is Beautiful, isn’t it?' 🌙",
+    "Maybe sometime… FaceTime or call?",
+    "I’m craving to see your face and listen to your voice :)"
+];
+
+let index = 0;
+
+function nextMessage() {
+    if (index < messages.length) {
+        document.getElementById("message").innerHTML = messages[index];
+        index++;
+    } else {
+        document.getElementById("message").innerHTML = "❤️ thank you for reading ❤️";
+    }
+}
+
+nextMessage();
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = (window.innerHeight - 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 4500);
+}
+</script>
+
+</body>
+</html>
